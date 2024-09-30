@@ -17,6 +17,7 @@ public class MyLibrary{
 	}
 	public void main(String[] args) {
 		control = new MyLibraryController();
+		model = new MyLibraryModel();
 		
 	}
 	
