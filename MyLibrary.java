@@ -9,9 +9,10 @@ import java.util.Scanner;
 public class MyLibrary{
 	private Scanner scanner;
 	private Boolean read;
+	
 	public MyLibrary(){
-		
-		
+		MyLibraryModel model;
+		MyLibraryController control;
 	}
 	
 	/*
@@ -20,6 +21,7 @@ public class MyLibrary{
 	 * will want to search for instead of confusing an invalid input.
 	 */
 	public String Search() {
+		System.out.println("What book would you like to search for: ");
 		return null;
 		
 	}
@@ -29,7 +31,7 @@ public class MyLibrary{
 	 * with the required information : title, author, rating (optional).
 	 */
 	public void addBook() {
-		
+		System.out.println("Book to add (Title:Author): ");
 	}
 	
 	/*
@@ -63,7 +65,7 @@ public class MyLibrary{
 	
 	/*
 	 * From a list of unread books, we can use random int to choose
-	 * what book to reccomend the user. Display the title and author.
+	 * what book to recommend the user. Display the title and author.
 	 */
 	
 	public void suggestRead() {
