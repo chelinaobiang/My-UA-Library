@@ -5,5 +5,6 @@
  */
 public class MyLibraryModel{
 	
+	private Boolean read;
 	
 }

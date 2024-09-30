@@ -4,7 +4,7 @@
  * user interface where the user can enter commands to get 
  * or add information to the library
  */
-import java.io.BufferedReader;
+import java.io.File;
 import java.util.Scanner;
 public class MyLibrary{
 	private Scanner scanner;
@@ -12,6 +12,10 @@ public class MyLibrary{
 	private MyLibraryController control;
 	
 	public MyLibrary(){
+		
+	}
+	public void main(String[] args) {
+		control = new MyLibraryController();
 		
 	}
 	
