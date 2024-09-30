@@ -9,10 +9,11 @@ import java.util.Scanner;
 public class MyLibrary{
 	private Scanner scanner;
 	private Boolean read;
+	private MyLibraryModel model;
+	private MyLibraryController control;
 	
 	public MyLibrary(){
-		MyLibraryModel model;
-		MyLibraryController control;
+		
 	}
 	
 	/*
