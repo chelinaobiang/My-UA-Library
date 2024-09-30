@@ -8,7 +8,6 @@ import java.io.BufferedReader;
 import java.util.Scanner;
 public class MyLibrary{
 	private Scanner scanner;
-	private Boolean read;
 	private MyLibraryModel model;
 	private MyLibraryController control;
 	
@@ -21,9 +20,12 @@ public class MyLibrary{
 	 * We can make this interactive to where there can be questions asked about what you
 	 * will want to search for instead of confusing an invalid input.
 	 */
-	public String Search() {
+	public void Search() {
 		System.out.println("What book would you like to search for: ");
-		return null;
+		scanner = new Scanner(System.in);
+		String search = scanner + "";
+		model.findBook(search);
+		scanner.close();
 		
 	}
 	
@@ -33,6 +35,10 @@ public class MyLibrary{
 	 */
 	public void addBook() {
 		System.out.println("Book to add (Title:Author): ");
+		scanner = new Scanner(System.in);
+		String addition = scanner + "";
+		model.addBook(addition);
+		scanner.close();
 	}
 	
 	/*
@@ -42,7 +48,7 @@ public class MyLibrary{
 	 * on the book and close it at the end.
 	 */
 	public String setToRead() {
-		return null;
+		return null; //What are we using to read??
 		
 	}
 	/*
@@ -50,8 +56,11 @@ public class MyLibrary{
 	 * Ask user for the rating 1-5 stars (check for valid input).
 	 */
 	public void rate() {
-		
-		
+		System.out.println("What rating would you give it (1-5 stars: ");
+		scanner = new Scanner(System.in);
+		String rate = scanner + "";
+		int rating = Integer.parseInt(rate);
+		model.addRate(rating);
 	}
 	
 	/*
@@ -60,8 +69,8 @@ public class MyLibrary{
 	 * everything should be printed and each book in a new line.
 	 */
 	public void getBooks() {
-		
-		
+		System.out.println("These are the books in your Library:");
+		for()
 	}
 	
 	/*
