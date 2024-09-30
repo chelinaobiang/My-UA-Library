@@ -64,7 +64,7 @@ public class MyLibrary{
 		scanner = new Scanner(System.in);
 		String rate = scanner + "";
 		int rating = Integer.parseInt(rate);
-		model.addRate(rating);
+		control.addRate(rating);
 	}
 	
 	/*
@@ -74,7 +74,7 @@ public class MyLibrary{
 	 */
 	public void getBooks() {
 		System.out.println("These are the books in your Library:");
-		for()
+		System.out.println(model.toString());
 	}
 	
 	/*
