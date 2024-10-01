@@ -5,6 +5,15 @@
 import java.util.ArrayList;
 
 public class MyLibraryController{
+	private boolean satisfied = false;
+	
+	public boolean isSatisfied() {
+	      return this.satisfied;
+	}
+	
+	public void setSatisfaction() {
+		this.satisfied = true;
+	}
 	
 	public class addBooks{
 		/*
