@@ -49,6 +49,7 @@ public class MyLibrary {
 				controller.setSatisfcation(); // sets satisfcation to true bc they dont want to do anything else
 			}
 		}
+		scanner.close();
 	}
 
 	/*
