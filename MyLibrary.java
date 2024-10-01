@@ -39,6 +39,9 @@ public class MyLibrary {
 					model.getBooks();
 				case 7:
 					model.suggestRead();
+				default:
+                    System.out.println("Invalid command. Try again.");
+                    break;
 			}
 			System.out.print("Is there anything else you would like to do? (y/n)");
 			String answer2 = scanner.nextLine().toLowerCase();
@@ -94,7 +97,7 @@ public class MyLibrary {
 		scanner = new Scanner(System.in);
 		String rate = scanner + "";
 		int rating = Integer.parseInt(rate);
-		control.addRate(rating);
+		model.addRate(rating);
 	}
 
 	/*
@@ -104,7 +107,7 @@ public class MyLibrary {
 	 */
 	public void getBooks() {
 		System.out.println("These are the books in your Library:");
-		System.out.println(model.toString());
+		for()
 	}
 
 	/*
