@@ -6,7 +6,7 @@
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Random;
+import java.util.Random; // Needs to be in controller
 
 public class MyLibraryModel{
 	
@@ -32,7 +32,13 @@ public class MyLibraryModel{
 		System.out.println("How would you like to search for your book? (Title or Author or Rating): ");
 		scanner = new Scanner(System.in);
 		String search = scanner + "";
-		searchType(search);
+		if(search.equals("Title") || search.equals("Author") || search.equals("Rating")) {
+			searchType(search);
+		}
+		else {
+			System.out.println("Error: You didn't type the given options.");
+			Search();
+		}
 		scanner.close();
 
 	}
@@ -104,12 +110,12 @@ public class MyLibraryModel{
 	 * This function is used to search(), once book is found. Ask user for the
 	 * rating 1-5 stars (check for valid input).
 	 */
-	public void rate() {
-		System.out.println("What rating would you give it (1-5 stars: ");
+	public void rate(Book book) {
+		System.out.println("What rating would you give it (1-5) stars: ");
 		scanner = new Scanner(System.in);
 		String rate = scanner + "";
 		int rating = Integer.parseInt(rate);
-		model.addRate(rating);
+		book.setRate(rating);
 	}
 
 	/*
@@ -118,8 +124,22 @@ public class MyLibraryModel{
 	 * book in a new line.
 	 */
 	public void getBooks() {
-		System.out.println("These are the books in your Library:");
-		for()
+		System.out.println("How do you want to access your books -> Title, Author, Rating, Read or Unread");
+		scanner = new Scanner(System.in);
+		String form = scanner + "";
+		if (form.equals("Title") || form.equals("Author") || form.equals("Rating") || form.equals("Read")
+				|| form.equals("Unread")) {
+			formatBooks(form);
+		}
+		else {
+			System.out.println("Error: You didn't type the given options.");
+			getBooks();
+		}
+		scanner.close();
+	}
+	private void formatBooks(String form) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	/*
@@ -127,9 +147,9 @@ public class MyLibraryModel{
 	 * recommend the user. Display the title and author.
 	 */
 
-	public void suggestRead() {
-
-	}
+//	public void suggestRead() {
+//		System.out.println("The book I recommend
+//	}
 
 }
 	
