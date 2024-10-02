@@ -6,6 +6,7 @@
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Random;
 
 public class MyLibraryModel{
 	
@@ -28,11 +29,40 @@ public class MyLibraryModel{
 	 * you will want to search for instead of confusing an invalid input.
 	 */
 	public void Search() {
-		System.out.println("What book would you like to search for: ");
+		System.out.println("How would you like to search for your book? (Title or Author or Rating): ");
 		scanner = new Scanner(System.in);
 		String search = scanner + "";
+		searchType(search);
 		scanner.close();
 
+	}
+	private void searchType(String type) {
+		type.toLowerCase().strip();
+		System.out.println("What would you like to find?: ");
+		scanner = new Scanner(System.in);
+		String data = scanner + "";
+		if(type.equals("Title")) {
+			for(Book book: library) {
+				if(data.equals(book.getTitle())) {
+				System.out.println( book.toString());
+				}
+			}
+		}
+		else if(type.equals("Author")) {
+			for(Book book: library) {
+				if(data.equals(book.getAuthor())) {
+				System.out.println( book.toString());
+				}
+			}
+		}
+		else if(type.equals("Rating")) {
+			for(Book book: library) {
+				int iData = Integer.parseInt(data);
+				if(iData ==book.getRating()) {
+				System.out.println(book.toString());
+				}
+			}
+		}
 	}
 
 	/*
@@ -40,10 +70,13 @@ public class MyLibraryModel{
 	 * information : title, author, rating (optional).
 	 */
 	public void addBook() {
-		System.out.println("Book to add (Title:Author): ");
+		System.out.println("Book to add in format (Title:Author): ");
 		scanner = new Scanner(System.in);
 		String addition = scanner + "";
-		model.addBook(addition);
+		String[] parts = addition.split(":");
+		book = new Book(parts[0], parts[1], 0, false);
+		library.add(book);
+		
 		scanner.close();
 	}
 

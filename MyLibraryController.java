@@ -12,6 +12,7 @@ public class MyLibraryController{
 	private boolean satisfied = false;
 	private MyLibraryModel model;
 	private Book book;
+	private Scanner input;
 	
 	public boolean isSatisfied() {
 	      return this.satisfied;
@@ -29,9 +30,12 @@ public class MyLibraryController{
 	 * This is similar to addBook, but this time we are taking a whole text file
 	 * then merging both of the lists of books so that the books are added.
 	 */
-	public void addBooks(String fileName) {
+	public void addBooks() {
 		try {
-	        File file = new File(fileName);
+			System.out.println("Type the text file you would like to add: ");
+			input = new Scanner(System.in);
+			String search = input + "";
+	        File file = new File(search);
 	        Scanner scanner = new Scanner(file);
 	        scanner.nextLine(); // skip template line
 	        while (scanner.hasNextLine()) {
