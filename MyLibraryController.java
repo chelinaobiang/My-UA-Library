@@ -2,7 +2,6 @@
 /*
  * This is where the rating and adding can be made.
  */
-import java.util.ArrayList;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -22,7 +21,7 @@ public class MyLibraryController{
 		this.satisfied = true;
 	}
 	
-	public void setRead(boolean read) {
+	public void makeRead(boolean read) {
 		book.read = read;
 	}
 	
@@ -42,20 +41,12 @@ public class MyLibraryController{
 	            String line = scanner.nextLine();
 	            model.addFromFile(line);
 	        }
-
 	        scanner.close();
 	    } catch (FileNotFoundException e) {
 	        System.out.println("File not found: " + e.getMessage());
 	    }
 	}
 		
-	
-
-
-
-
-
-
 
 }
 	

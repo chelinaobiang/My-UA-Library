@@ -11,12 +11,16 @@ public class Book {
 		this.title = title;
 		this.author = author;
 		this.rating = rating;
-		controller.setRead(read);
+		this.read = read;
 	}
 
 	// Getters
 	public String getTitle() {
 		return title;
+	}
+	public String toString() {
+		String str = "";
+		str += title + " by: " + author + " ( " + getStrRating() + " )";
 	}
 
 	public String getAuthor() {
@@ -29,5 +33,10 @@ public class Book {
 
 	public boolean isRead() {
 		return read;
+	}
+
+	public void setRead() {
+		controller.makeRead(true);
+		
 	}
 }

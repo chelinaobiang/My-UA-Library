@@ -10,8 +10,8 @@ import java.util.Scanner;
 
 public class MyLibrary {
 	private Scanner scanner;
-	private MyLibraryModel model;
-	private MyLibraryController controller;
+	private static MyLibraryModel model;
+	private static MyLibraryController controller;
 
 	public MyLibrary() {
 		controller = new MyLibraryController();

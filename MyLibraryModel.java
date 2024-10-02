@@ -73,7 +73,16 @@ public class MyLibraryModel{
 		System.out.println("Book to add in format (Title:Author): ");
 		scanner = new Scanner(System.in);
 		String addition = scanner + "";
+		if (!addition.contains(":")) {
+			System.out.println("Error, wrong input form.");
+			addBook();
+		}
 		String[] parts = addition.split(":");
+		if (parts[0] == null || parts[1] == null) {
+			System.out.println("Error, wrong input form.");
+			addBook();
+		}
+		
 		book = new Book(parts[0], parts[1], 0, false);
 		library.add(book);
 		
@@ -86,8 +95,8 @@ public class MyLibraryModel{
 	 * search is made to get one book. Then you display the text they want to read
 	 * based on the book and close it at the end.
 	 */
-	public String setToRead() {
-		book.setRead(true); // What are we using to read??
+	public void setToRead() {
+		book.setRead(); // What are we using to read??
 
 	}
 
