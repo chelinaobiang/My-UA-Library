@@ -21,32 +21,44 @@ public class MyLibraryController{
 		this.satisfied = true;
 	}
 	
-	public void makeRead(boolean read) {
-		book.read = read;
-	}
-	
 	/*
 	 * This is similar to addBook, but this time we are taking a whole text file
 	 * then merging both of the lists of books so that the books are added.
 	 */
-	public void addBooks() {
+	public void addBooks(String fileName) {
+		System.out.println("Type the text file you would like to add: ");
+		input = new Scanner(System.in);
+		String search = input + "";
 		try {
-			System.out.println("Type the text file you would like to add: ");
-			input = new Scanner(System.in);
-			String search = input + "";
-	        File file = new File(search);
+			File file = new File(search);
 	        Scanner scanner = new Scanner(file);
-	        scanner.nextLine(); // skip template line
+	        if (scanner.hasNextLine()) {
+	        	scanner.nextLine(); // skips first line with headers
+	        }
 	        while (scanner.hasNextLine()) {
 	            String line = scanner.nextLine();
+	            String[] info = line.split(";");
+	            if (info.length == 2) {
+	            	String title = info[0].trim();
+	            	String author = details[1].trim();
+	            	model.addBook(title, author); 
+	            } 
 	            model.addFromFile(line);
 	        }
-	        scanner.close();
+
 	    } catch (FileNotFoundException e) {
 	        System.out.println("File not found: " + e.getMessage());
 	    }
+		scanner.close();
 	}
 		
+	
+
+
+
+
+
+
 
 }
 	
@@ -58,3 +70,6 @@ public class MyLibraryController{
 	
 	
 	
+		
+
+}
