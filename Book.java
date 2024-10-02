@@ -46,7 +46,7 @@ public class Book {
 	}
 
 	public void setRate(int rating2) {
-		rating = rating2;
+		this.rating = rating2;
 		
 	}
 
