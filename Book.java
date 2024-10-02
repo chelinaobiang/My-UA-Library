@@ -37,11 +37,11 @@ public class Book {
 	}
 
 	public boolean isRead() {
-		return read;
+		return this.read;
 	}
 
 	public void setRead() {
-		read = true;
+		this.read = true;
 		
 	}
 
@@ -49,6 +49,5 @@ public class Book {
 		rating = rating2;
 		
 	}
-=======
->>>>>>> 694bd244e1b6d53060f5f1acde9790845f968a43
+
 }
