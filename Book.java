@@ -41,7 +41,7 @@ public class Book {
 	}
 
 	public void setRead() {
-		controller.makeRead(true);
+		read = true;
 		
 	}
 
@@ -49,4 +49,6 @@ public class Book {
 		rating = rating2;
 		
 	}
+=======
+>>>>>>> 694bd244e1b6d53060f5f1acde9790845f968a43
 }
