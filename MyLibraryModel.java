@@ -16,12 +16,6 @@ public class MyLibraryModel{
 	public MyLibraryModel() {
 		Book book;
 	}
-	public void addFromFile(String line) { //Adding the books for the 1st time in library.
-		line.strip();
-		String[] info = line.split(";");
-		book = new Book(info[0], info[1], 0, false);
-		library.add(book);
-	}
 	
 	/*
 	 * The user will search for a book based on book title, author, or rating. We

@@ -21,6 +21,10 @@ public class MyLibraryController{
 		this.satisfied = true;
 	}
 	
+	public void getAllUnreadBooks() {
+		
+	}
+	
 	/*
 	 * This is similar to addBook, but this time we are taking a whole text file
 	 * then merging both of the lists of books so that the books are added.
@@ -42,6 +46,7 @@ public class MyLibraryController{
 	            	String title = info[0].trim();
 	            	String author = details[1].trim();
 	            	model.addBook(title, author); 
+	            	model.library.add(book);
 	            } 
 	            model.addFromFile(line);
 	        }
