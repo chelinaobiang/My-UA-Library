@@ -21,6 +21,11 @@ public class Book {
 	public String toString() {
 		String str = "";
 		str += title + " by: " + author + " ( " + getStrRating() + " )";
+		return str;
+	}
+	
+	public String getStrRating() {
+		return ("*".repeat(rating));
 	}
 
 	public String getAuthor() {
