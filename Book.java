@@ -24,7 +24,7 @@ public class Book {
 		return str;
 	}
 	
-	public String getStrRating() {
+	public String getStrRating(){
 		return ("*".repeat(rating));
 	}
 
