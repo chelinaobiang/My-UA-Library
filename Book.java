@@ -40,8 +40,4 @@ public class Book {
 		return read;
 	}
 
-	public void setRead() {
-		controller.makeRead(true);
-		
-	}
 }
