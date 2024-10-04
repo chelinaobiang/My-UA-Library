@@ -67,7 +67,6 @@ public class MyLibraryController{
 			}
 		}
 		unread.sort((b1, b2) -> b1.titleCompareTo(b2));
-		printList(unread);
 		return unread;
 	}
 	/*
@@ -88,7 +87,6 @@ public class MyLibraryController{
 			}
 		}
 		readBooks.sort((b1, b2) -> b1.titleCompareTo(b2));
-		printList(readBooks);
 		return readBooks;
 	}
 	public void printList(ArrayList<Book> Books) {

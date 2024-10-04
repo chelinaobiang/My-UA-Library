@@ -309,10 +309,10 @@ public class MyLibraryModel {
 			controller.printList(library);
 		} 
 		else if(form.equals("Read")) {
-			controller.getAllreadBooks(library);
+			controller.printList(controller.getAllreadBooks(library));
 			}
 		else if (form.equals("Unread")) {
-			controller.getAllUnreadBooks(library);
+			controller.printList(controller.getAllUnreadBooks(library));
 			} 
 		else {
 			System.out.println("Error: You didn't type the given options.");

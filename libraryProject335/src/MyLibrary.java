@@ -1,3 +1,4 @@
+
 /* Genesis Benedith & Chelina Obiang
  * Course: CSC 335 - Fall 2024
  * This file contains a main method that runs a text-based 
@@ -100,6 +101,7 @@ public class MyLibrary {
 					model.getBooks();
 				case 7:
 					controller.suggestRead();
+					break;
 				default:
                     System.out.println("Invalid command. Try again.");
                     break;
@@ -109,7 +111,7 @@ public class MyLibrary {
 			String answer2 = scanner.nextLine().toLowerCase();
 			
 			if (answer2.equals("n")) {
-				controller.setSatisfaction(); // Sets satisfaction to true bc they dont want to do anything else
+				controller.setSatisfaction(); // Sets satisfaction to true b/c they don't want to do anything else
 			}
 		}
 		scanner.close();
