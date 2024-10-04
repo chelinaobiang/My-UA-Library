@@ -125,30 +125,28 @@ public class MyLibraryController{
 	public void addBooks() {
 		ArrayList<Book> library = model.getLibrary();
 		
-		System.out.println("Type the name of the text file that contains the books you would like to add: ");
-		input = new Scanner(System.in);
-		String search = input + "";
+		Scanner inputScanner = new Scanner(System.in);
+        System.out.println("Type the name of the text file that contains the books you would like to add: ");
+        String fileName = inputScanner.nextLine();
+		
 		try {
-			File file = new File(search);
-	        Scanner scanner = new Scanner(file);
-	        if (scanner.hasNextLine()) {
-	        	scanner.nextLine(); // skips first line with headers
-	        }
-	        while (scanner.hasNextLine()) {
-	            String line = scanner.nextLine();
-	            String[] info = line.split(";");
-	            if (info.length == 2) {
-	            	String title = info[0].trim();
-	            	String author = info[1].trim();
-	            	Book book = new Book(title, author, 0, false);
-	            	library.add(book);
-	            	scanner.close();
-	            } 
-	        }
-
-	    } catch (FileNotFoundException e) {
-	        System.out.println("File not found: " + e.getMessage());
-	    }
+			File file = new File(fileName); 
+			Scanner fileScanner = new Scanner(file);
+			while (fileScanner.hasNextLine()) {
+                String line = fileScanner.nextLine();
+                String[] details = line.split(";");
+                if (details.length == 2) {
+                    String title = details[0].trim();
+                    String author = details[1].trim();
+                    book = new Book(title, author, 0, false);
+            		library.add(book);
+                }
+                System.out.println("Book added successfully.");
+            } 
+			
+		} catch (FileNotFoundException e) {
+                System.out.println("File not found: " + fileName);
+            }
 	}
 }
 	
