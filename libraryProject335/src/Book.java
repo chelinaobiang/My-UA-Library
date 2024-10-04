@@ -1,5 +1,5 @@
-
-public class Book {
+package libraryProject335.src;
+public class Book implements Comparable<Book>{
 	private String title;
 	private String author;
 	private int rating;
@@ -48,6 +48,20 @@ public class Book {
 	public void setRate(int rating2) {
 		this.rating = rating2;
 		
+	}
+	public int titleCompareTo(Book other) {
+	    return this.title.compareTo(other.title);
+	}
+	public int authorCompareTo(Book other) {
+	    return this.author.compareTo(other.author);
+	}
+	public int ratingCompareTo(Book other) {
+	    return Integer.compare(this.rating, other.rating);  // Comparing books by rating (from 0 to 5)
+	}
+
+	@Override
+	public int compareTo(Book o) {
+		return this.titleCompareTo(o);
 	}
 
 }
