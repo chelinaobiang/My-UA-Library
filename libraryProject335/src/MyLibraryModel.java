@@ -16,8 +16,12 @@ public class MyLibraryModel {
 	private MyLibraryController controller;
 
 	public MyLibraryModel() {
-		Book book;
-	}
+        library = new ArrayList<>();
+    }
+	
+	public ArrayList<Book> getLibrary() {
+        return library;
+    }
 
 	/*
 	 * The user will search for a book based on book title, author, or rating. We
