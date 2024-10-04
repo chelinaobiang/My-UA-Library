@@ -143,8 +143,8 @@ public class MyLibraryController{
                 String line = fileScanner.nextLine();
                 String[] details = line.split(";");
                 if (details.length == 2) {
-                    String title = details[0].trim();
-                    String author = details[1].trim();
+                    String title = details[0].toLowerCase().trim();
+                    String author = details[1].toLowerCase().trim();
                     book = new Book(title, author, 0, false);
             		library.add(book);
                 }
