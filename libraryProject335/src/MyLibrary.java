@@ -13,15 +13,18 @@ public class MyLibrary {
 	private static MyLibraryController controller;
 
 	public MyLibrary() {
-		controller = new MyLibraryController();
-		model = new MyLibraryModel();
+		
 	}
 
 	public static void main(String[] args) { //does it have to be static? I'm getting errors for try/catch.
+		controller = new MyLibraryController();
+		model = new MyLibraryModel();
+		
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Welcome to the UA Library!");
+		
 		while(!controller.isSatisfied()) {
-			System.out.print("What would you like to do? \n Enter a number from 1-7 for the following commands: (1- search, 2- rate, 3- add a book, 4- add books, 5- read book, 6- get list of books, 7- get suggested book)");
+			System.out.print("What would you like to do? \nEnter a number from 1-7 for the following commands: (1- search, 2- rate, 3- add a book, 4- add books, 5- read book, 6- get list of books, 7- get suggested book)");
 			int answer = scanner.nextInt();
 			switch (answer) {
 				case 1: // Call searchBooks to search library by various search types
@@ -53,6 +56,7 @@ public class MyLibrary {
 					model.addBook();
 				case 4: 
 					controller.addBooks();
+					break;
 				
 				case 5: // Changes a book's status to read if found
 					
