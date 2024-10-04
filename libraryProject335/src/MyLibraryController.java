@@ -1,5 +1,3 @@
-package libraryProject335.src;
-
 /**
  * The MyLibraryController class manages a few of the operations for a library system,
  * interacting with the Model and handling functionalities related to books in the library.
@@ -33,6 +31,11 @@ public class MyLibraryController{
 	private MyLibraryModel model;
 	private Book book;
 	private Scanner input;
+	
+	public MyLibraryController() {
+        model = new MyLibraryModel();
+    }
+	
 	/*
 	 * Checks if the user is satisfied with the library experience. Then returns true if 
 	 * the user is satisfied; false otherwise.
@@ -94,7 +97,8 @@ public class MyLibraryController{
 	 * unread book and prints its details as a recommendation to the user.
 	 */
 	public void suggestRead() {
-		ArrayList<Book> unread = getAllUnreadBooks(model.library);
+		ArrayList<Book> library = model.getLibrary();
+		ArrayList<Book> unread = getAllUnreadBooks(library);
 		Random rand = new Random();
 		int randomInt = rand.nextInt(unread.size());
 		book = unread.get(randomInt);
@@ -118,8 +122,10 @@ public class MyLibraryController{
 	 * Parameter: fileName The name of the text file containing book data. The expected format 
 	 *                 for each line is "title;author".
 	 */
-	public void addBooks(String fileName) {
-		System.out.println("Type the text file you would like to add: ");
+	public void addBooks() {
+		ArrayList<Book> library = model.getLibrary();
+		
+		System.out.println("Type the name of the text file that contains the books you would like to add: ");
 		input = new Scanner(System.in);
 		String search = input + "";
 		try {
@@ -135,7 +141,7 @@ public class MyLibraryController{
 	            	String title = info[0].trim();
 	            	String author = info[1].trim();
 	            	Book book = new Book(title, author, 0, false);
-	            	model.library.add(book);
+	            	library.add(book);
 	            	scanner.close();
 	            } 
 	        }
