@@ -21,16 +21,35 @@ public class MyLibrary {
 		model = new MyLibraryModel();
 		
 		Scanner scanner = new Scanner(System.in);
-		System.out.println("Welcome to the UA Library!");
+		System.out.println("Welcome to the UA Library!\n");
 		
 		while(!controller.isSatisfied()) {
-			System.out.print("What would you like to do? \nEnter a number from 1-7 for the following commands: (1- search, 2- rate, 3- add a book, 4- add books, 5- read book, 6- get list of books, 7- get suggested book)");
+			System.out.println("What would you like to do? Enter a number from 1-7 for the following commands:");
+			System.out.println("1- search, 2- rate, 3- add a book, 4- add books, 5- read book, 6- get list of books, 7- get suggested book");
 			int answer = scanner.nextInt();
 			switch (answer) {
 				case 1: // Call searchBooks to search library by various search types
 					
 					Book book = model.searchBooks();
-					System.out.println(book.toString()); // Print string format of string details
+					
+					if (book == null) {
+						System.out.println("Would you like to search again? (y/n)");
+						scanner = new Scanner(System.in);
+					    String searchAgain = scanner.nextLine().toLowerCase().trim(); 
+					    if (searchAgain.equals("y")) {
+                            // Call the search again
+                            book = model.searchBookByTitle();
+                        }
+                    }
+
+                    if (book != null) {
+                    	System.out.println(book.toString()); // Print string format of string details
+                    } else {
+                        System.out.println("No book selected. Returning to the main menu.");
+                    }
+                    break;
+					
+					
 				
 				case 2: // Rate's a book, if found
 					
@@ -85,9 +104,11 @@ public class MyLibrary {
                     System.out.println("Invalid command. Try again.");
                     break;
 			}
-			System.out.print("Is there anything else you would like to do? (y/n)");
+			System.out.println("Is there anything else you would like to do? (y/n)");
+			scanner = new Scanner(System.in);
 			String answer2 = scanner.nextLine().toLowerCase();
-			if (answer2 == "n") {
+			
+			if (answer2.equals("n")) {
 				controller.setSatisfaction(); // Sets satisfaction to true bc they dont want to do anything else
 			}
 		}
