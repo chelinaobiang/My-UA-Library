@@ -5,6 +5,7 @@
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.ResourceBundle.Control;
 import java.util.Scanner;
 
 public class MyLibraryModel {
@@ -12,6 +13,7 @@ public class MyLibraryModel {
 	private Scanner scanner;
 	private Book book;
 	private ArrayList<Book> library = new ArrayList<>();
+	private MyLibraryController controller;
 
 	public MyLibraryModel() {
 		Book book;
@@ -290,10 +292,12 @@ public class MyLibraryModel {
 		System.out.println("How do you want to access your books -> Title, Author, Rating, Read or Unread");
 		scanner = new Scanner(System.in);
 		String form = scanner + "";
-		if (form.equals("Title") || form.equals("Author") || form.equals("Rating") || form.equals("Read")
-				|| form.equals("Unread")) {
-			formatBooks(form);
-		} else {
+		if (form.equals("Title")) {library.sort((b1, b2) -> b1.titleCompareTo(b2));} 
+		else if (form.equals("Author")) {library.sort((b1, b2) -> b1.authorCompareTo(b2));} 
+		else if (form.equals("Rating")) {library.sort((b1, b2) -> b1.ratingCompareTo(b2));} 
+		else if(form.equals("Read")) {controller.getAllreadBooks(library);}
+		else if (form.equals("Unread")) {controller.getAllUnreadBooks(library);} 
+		else {
 			System.out.println("Error: You didn't type the given options.");
 			getBooks();
 		}
