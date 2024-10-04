@@ -1,4 +1,3 @@
-
 /* Genesis Benedith & Chelina Obiang
  * Course: CSC 335 - Fall 2024
  * This file contains a main method that runs a text-based 
@@ -30,7 +29,7 @@ public class MyLibrary {
 					Book book = model.searchBooks();
 					System.out.println(book.toString()); // Print string format of string details
 				
-				case 2: // Call searchBookByTitle to search library by title
+				case 2: // Rate's a book, if found
 					
 					book = model.searchBookByTitle();
 					if (book == null) {
@@ -77,7 +76,7 @@ public class MyLibrary {
 				case 6:
 					model.getBooks();
 				case 7:
-					model.suggestRead();
+					controller.suggestRead();
 				default:
                     System.out.println("Invalid command. Try again.");
                     break;
@@ -85,7 +84,7 @@ public class MyLibrary {
 			System.out.print("Is there anything else you would like to do? (y/n)");
 			String answer2 = scanner.nextLine().toLowerCase();
 			if (answer2 == "n") {
-				controller.setSatisfcation(); // sets satisfcation to true bc they dont want to do anything else
+				controller.setSatisfaction(); // Sets satisfaction to true bc they dont want to do anything else
 			}
 		}
 		scanner.close();
