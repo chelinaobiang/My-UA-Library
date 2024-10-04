@@ -1,5 +1,3 @@
-package libraryProject335.src;
-
 /**
  * The Book class represents a book with a title, author, rating, and read status.
  * It implements the Comparable interface to allow for comparison between Book objects
