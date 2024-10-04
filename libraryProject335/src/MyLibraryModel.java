@@ -288,7 +288,7 @@ public class MyLibraryModel {
 	}
 
 	/*
-	 * This uses the arraylist of books and displays the books sorted by title, then
+	 * This uses the array list of books and displays the books sorted by title, then
 	 * author, then if read or not. I think everything should be printed and each
 	 * book in a new line.
 	 */
@@ -296,11 +296,24 @@ public class MyLibraryModel {
 		System.out.println("How do you want to access your books -> Title, Author, Rating, Read or Unread");
 		scanner = new Scanner(System.in);
 		String form = scanner + "";
-		if (form.equals("Title")) {library.sort((b1, b2) -> b1.titleCompareTo(b2));} 
-		else if (form.equals("Author")) {library.sort((b1, b2) -> b1.authorCompareTo(b2));} 
-		else if (form.equals("Rating")) {library.sort((b1, b2) -> b1.ratingCompareTo(b2));} 
-		else if(form.equals("Read")) {controller.getAllreadBooks(library);}
-		else if (form.equals("Unread")) {controller.getAllUnreadBooks(library);} 
+		if (form.equals("Title")) {
+			library.sort((b1, b2) -> b1.titleCompareTo(b2));
+			controller.printList(library);
+			} 
+		else if (form.equals("Author")) {
+			library.sort((b1, b2) -> b1.authorCompareTo(b2));
+			controller.printList(library);
+		} 
+		else if (form.equals("Rating")) {
+			library.sort((b1, b2) -> b1.ratingCompareTo(b2));
+			controller.printList(library);
+		} 
+		else if(form.equals("Read")) {
+			controller.getAllreadBooks(library);
+			}
+		else if (form.equals("Unread")) {
+			controller.getAllUnreadBooks(library);
+			} 
 		else {
 			System.out.println("Error: You didn't type the given options.");
 			getBooks();
