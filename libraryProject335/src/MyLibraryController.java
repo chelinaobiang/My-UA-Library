@@ -1,7 +1,26 @@
 package libraryProject335.src;
-/*
- * This is where the rating and adding can be made.
+
+/**
+ * The MyLibraryController class manages a few of the operations for a library system,
+ * interacting with the Model and handling functionalities related to books in the library.
+ *
+ * Attributes:
+ * - satisfied (boolean): Indicates whether the user is satisfied with the library commands.
+ * - model (MyLibraryModel): The model that represents the library's data.
+ * - book (Book): A temporary Book object used for recommendations or additions.
+ * - input (Scanner): A Scanner for user input from the console for interactions.
+ *
+ * Methods:
+ * - isSatisfied: Returns the current satisfaction status of the user.
+ * - setSatisfaction: Sets the satisfaction status to true to end program.
+ * - getAllUnreadBooks: Returns a sorted list of all unread books in the library.
+ * - getAllreadBooks: Returns a sorted list of all read books in the library.
+ * - suggestRead: Suggests a random unread book from the library.
+ * - addBooks: Adds books to the library from a specified text file, skipping headers
+ *   and parsing each book's title and author gathered from each line.
+ *
  */
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -14,17 +33,28 @@ public class MyLibraryController{
 	private MyLibraryModel model;
 	private Book book;
 	private Scanner input;
-	
+	/*
+	 * Checks if the user is satisfied with the library experience. Then returns true if 
+	 * the user is satisfied; false otherwise.
+	 */
 	public boolean isSatisfied() {
 	      return this.satisfied;
 	}
-	
+	/*
+	 * Converts the satisfaction to true.
+	 */
 	public void setSatisfaction() {
 		this.satisfied = true;
 	}
 	/*
-	 * This returns all of the unread books that are currently in the library so it gathers the library array
-	 * and then sorts the books by title.
+	 * Retrieves all unread books from the library.
+	 * 
+	 * This method iterates through the provided list of books, collecting 
+	 * those that have not been read. It then sorts the unread books by title 
+	 * before returning them as a new ArrayList.
+	 * 
+	 * Parameter: library An ArrayList of Book objects representing the library.
+	 * Returns An ArrayList of unread Book objects, sorted by title.
 	 */
 	public ArrayList<Book> getAllUnreadBooks(ArrayList<Book> library) {
 		ArrayList<Book> unread = new ArrayList<>();
@@ -37,8 +67,14 @@ public class MyLibraryController{
 		return unread;
 	}
 	/*
-	 * This returns all of the read books that are currently in the library so it gathers the library array
-	 * and then sorts the books by title.
+	 * Retrieves all read books from the library.
+	 * 
+	 * This method iterates through the provided list of books, collecting 
+	 * those that have been read. It then sorts the read books by title 
+	 * before returning them as a new ArrayList.
+	 * 
+	 * Parameter: library An ArrayList of Book objects representing the library.
+	 * Returns An ArrayList of read Book objects, sorted by title.
 	 */
 	public ArrayList<Book> getAllreadBooks(ArrayList<Book> library) {
 		ArrayList<Book> readBooks = new ArrayList<>();
@@ -51,8 +87,11 @@ public class MyLibraryController{
 		return readBooks;
 	}
 	/*
-	 * This prints the recommended book based on the random selection of books that haven't beet read
-	 * from the getAllUnreadBooks method.
+	 * Suggests a random unread book from the library.
+	 * 
+	 * This method first retrieves the list of unread books using 
+	 * the getAllUnreadBooks method. It then randomly selects one 
+	 * unread book and prints its details as a recommendation to the user.
 	 */
 	public void suggestRead() {
 		ArrayList<Book> unread = getAllUnreadBooks(model.library);
@@ -63,8 +102,21 @@ public class MyLibraryController{
 	}
 	
 	/*
-	 * This is similar to addBook, but this time we are taking a whole text file
-	 * then adding it to the lists of books so that the books are added.
+	 * Adds multiple books to the library from a specified text file.
+	 * 
+	 * This method prompts the user for a text file name, reads the file line by line, 
+	 * and parses each line to extract book titles and authors. Each book is created 
+	 * as a new Book object with a default rating of 0 and a read status of false, 
+	 * and then added to the library's collection.
+	 * 
+	 * The method skips the first line of the file, which is assumed to contain headers.
+	 * If a line does not contain exactly two pieces of information (title and author), 
+	 * that line is ignored. 
+	 * 
+	 * If the specified file cannot be found, an error message is displayed.
+	 * 
+	 * Parameter: fileName The name of the text file containing book data. The expected format 
+	 *                 for each line is "title;author".
 	 */
 	public void addBooks(String fileName) {
 		System.out.println("Type the text file you would like to add: ");
@@ -92,25 +144,5 @@ public class MyLibraryController{
 	        System.out.println("File not found: " + e.getMessage());
 	    }
 	}
-		
-	
-
-
-
-
-
-
-
 }
 	
-	
-	
-	
-	
-	
-	
-	
-	
-		
-
-}
