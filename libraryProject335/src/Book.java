@@ -3,7 +3,6 @@ public class Book implements Comparable<Book>{
 	private String title;
 	private String author;
 	private int rating;
-	private MyLibraryController controller;
 	public boolean read;
 
 	// Constructor
