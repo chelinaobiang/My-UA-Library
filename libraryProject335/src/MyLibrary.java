@@ -28,29 +28,18 @@ public class MyLibrary {
 			System.out.println("What would you like to do? Enter a number from 1-7 for the following commands:");
 			System.out.println("1- search, 2- rate, 3- add a book, 4- add books, 5- read book, 6- get list of books, 7- get suggested book");
 			int answer = scanner.nextInt();
+			scanner.nextLine();
+//			while (true) {
+//				try {
+//					
+//				} catch (NumberFormatException e) {
+//					
+//				}
 			switch (answer) {
-				case 1: // Call searchBooks to search library by various search types
+				case 1: // Search library by various search types
 					
 					Book book = model.searchBooks();
-					
-					if (book == null) {
-						System.out.println("Would you like to search again? (y/n)");
-						scanner = new Scanner(System.in);
-					    String searchAgain = scanner.nextLine().toLowerCase().trim(); 
-					    if (searchAgain.equals("y")) {
-                            // Call the search again
-                            book = model.searchBookByTitle();
-                        }
-                    }
-
-                    if (book != null) {
-                    	System.out.println(book.toString()); // Print string format of string details
-                    } else {
-                        System.out.println("No book selected. Returning to the main menu.");
-                    }
                     break;
-					
-					
 				
 				case 2: // Rate's a book, if found
 					
@@ -58,10 +47,9 @@ public class MyLibrary {
 					if (book == null) {
 						System.out.println("Would you like to search again? (y/n)");
 						scanner = new Scanner(System.in);
-					    String searchAgain = scanner.nextLine().toLowerCase().trim(); 
+						String searchAgain = scanner.nextLine().toLowerCase().trim(); 
 					    if (searchAgain.equals("y")) {
-                            // Call the search again
-                            book = model.searchBookByTitle();
+                            book = model.searchBookByTitle(); // Call the search again
                         }
                     }
 
@@ -73,8 +61,12 @@ public class MyLibrary {
                     break;
 				
 				case 3:
+					
 					model.addBook();
+					break;
+					
 				case 4: 
+					
 					controller.addBooks();
 					break;
 				
@@ -98,7 +90,10 @@ public class MyLibrary {
                     }
 					
 				case 6:
+					
 					model.getBooks();
+					break;
+					
 				case 7:
 					controller.suggestRead();
 					break;
@@ -106,15 +101,17 @@ public class MyLibrary {
                     System.out.println("Invalid command. Try again.");
                     break;
 			}
+			
 			System.out.println("Is there anything else you would like to do? (y/n)");
 			scanner = new Scanner(System.in);
 			String answer2 = scanner.nextLine().toLowerCase();
-			
 			if (answer2.equals("n")) {
 				controller.setSatisfaction(); // Sets satisfaction to true b/c they don't want to do anything else
+				System.out.println("Thanks for visiting the UA Library!");
 			}
 		}
 		scanner.close();
+		System.exit(0);
 	}
 }
 
