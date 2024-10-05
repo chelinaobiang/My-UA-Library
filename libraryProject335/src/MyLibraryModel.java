@@ -16,7 +16,7 @@ public class MyLibraryModel {
 	private MyLibraryController controller;
 
 	public MyLibraryModel() {
-        library = new ArrayList<>();
+        this.library = new ArrayList<>();
     }
 	
 	public ArrayList<Book> getLibrary() {
@@ -50,7 +50,18 @@ public class MyLibraryModel {
 	            result = searchBooks();  // Call the search method again for a valid input
 	    }
 
-	    scanner.close();
+	    if (result == null) {
+			System.out.println("Would you like to search again? (y/n)");
+			scanner = new Scanner(System.in);
+			String searchAgain = scanner.nextLine().toLowerCase().trim(); 
+		    if (searchAgain.equals("y")) {
+                searchBooks(); // Call the search again
+            } else {
+            	System.out.println("No book selected. Returning to the main menu.");
+            }
+        } else {
+        	System.out.println("Found the book: " + result.getTitle());
+        }
 	    return result;
 
 	}
@@ -60,7 +71,6 @@ public class MyLibraryModel {
 		System.out.println("What is the title of the book you'd like to search for?");
 		scanner = new Scanner(System.in);
 		String title = scanner.nextLine().toLowerCase().trim();
-
 		ArrayList<Book> booksFound = new ArrayList<>(); // Create empty array list to store books with matching data
 
 		// Search through entire library for books with given title and add to
@@ -245,23 +255,49 @@ public class MyLibraryModel {
 	 * information : title, author, rating (optional).
 	 */
 	public void addBook() {
-		System.out.println("Book to add in format (Title:Author): ");
+		System.out.println("What is the title of the book you would like to add?");
 		scanner = new Scanner(System.in);
-		String addition = scanner + "";
-		if (!addition.contains(":")) {
-			System.out.println("Error, wrong input form.");
-			addBook();
-		}
-		String[] parts = addition.split(":");
-		if (parts[0] == null || parts[1] == null) {
-			System.out.println("Error, wrong input form.");
-			addBook();
-		}
+		String title = scanner.nextLine().toLowerCase();
+		
+		System.out.println("Who is the author of the book you would like to add?");
+		scanner = new Scanner(System.in);
+		String author = scanner.nextLine().toLowerCase();
+		
+		System.out.println("Have you read this book already? (y/n)");
+		scanner = new Scanner(System.in);
+		String read = scanner.nextLine().toLowerCase();
+		boolean readStatus = false;
+		if (read.equals("y")) {
+			readStatus = true;
+		} 
+		
+		System.out.println("Would you like to rate this book now? (y/n)");
+		scanner = new Scanner(System.in);
+		String rate = scanner.nextLine().toLowerCase();
+		int rating = 0;
+		if (rate.equals("y")) {
+			while (true) {
+				try {
+					System.out.println("How many stars would you like to rate this book? (1-5)");
+					scanner = new Scanner(System.in);
+					rating = Integer.parseInt(scanner.nextLine().trim());
+					if (rating < 1 || rating > 5) {
+						System.out.println("Invalid input. Please enter a rating between 1 and 5.");
+					} else {
+						break; // Exit loop if input is valid
+					}
+				} catch (NumberFormatException e) {
+					System.out.println("Invalid input. Please enter a number between 1 and 5.");
+					scanner.next(); // Clear invalid input
+				}
 
-		book = new Book(parts[0], parts[1], 0, false);
+			}
+		}
+		
+		book = new Book(title, author, rating, readStatus);
 		library.add(book);
+		System.out.println("Book successfully added.");
 
-		scanner.close();
 	}
 
 	/*
@@ -293,32 +329,43 @@ public class MyLibraryModel {
 	 * book in a new line.
 	 */
 	public void getBooks() {
-		System.out.println("How do you want to access your books -> Title, Author, Rating, Read or Unread");
+		System.out.println("To view books in this library, choose one of the following options (1-4):\n");
+		System.out.println("1. Titles in alphabetical order");
+		System.out.println("2. Authors in alphabetical order");
+		System.out.println("3. All unread books");
+		System.out.println("4. All read books");
+		
 		scanner = new Scanner(System.in);
-		String form = scanner + "";
-		if (form.equals("Title")) {
-			library.sort((b1, b2) -> b1.titleCompareTo(b2));
-			controller.printList(library);
-			} 
-		else if (form.equals("Author")) {
-			library.sort((b1, b2) -> b1.authorCompareTo(b2));
-			controller.printList(library);
-		} 
-		else if (form.equals("Rating")) {
-			library.sort((b1, b2) -> b1.ratingCompareTo(b2));
-			controller.printList(library);
-		} 
-		else if(form.equals("Read")) {
-			controller.printList(controller.getAllreadBooks(library));
+		int option; 
+		
+		while (true) {
+			try {
+				option = Integer.parseInt(scanner.nextLine().trim());
+				if (option < 1 || option > 4) {
+					System.out.println("Invalid input. Please enter a rating between 1 and 4.");
+				} else {
+					if (option == 1) {
+						
+					} else if (option == 2) {
+						
+					} else if (option == 3) {
+						
+					} else {
+						
+					}
+				}
+			} catch (NumberFormatException e) {
+				System.out.println("Invalid input. Please enter a number between 1 and 4.");
+				scanner.next(); // Clear invalid input
 			}
-		else if (form.equals("Unread")) {
-			controller.printList(controller.getAllUnreadBooks(library));
-			} 
-		else {
-			System.out.println("Error: You didn't type the given options.");
-			getBooks();
+
 		}
-		scanner.close();
+		
+		ArrayList<Book> libraryCopy = getLibrary();
+		
+		for (Book book : libraryCopy) {
+			System.out.println(book.getTitle());
+		}
 	}
 
 
