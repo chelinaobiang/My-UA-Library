@@ -1,23 +1,19 @@
-
 /**
- * The MyLibraryController class manages a few of the operations for a library system,
- * interacting with the Model and handling functionalities related to books in the library.
+ * Authors: Genesis Benedith & Chelina Obiang
+ * The MyLibraryController class manages operations for a library system,
+ * interacting with MyLibraryModel to handle book-related functionalities.
  *
  * Attributes:
- * - satisfied (boolean): Indicates whether the user is satisfied with the library commands.
- * - model (MyLibraryModel): The model that represents the library's data.
- * - book (Book): A temporary Book object used for recommendations or additions.
- * - input (Scanner): A Scanner for user input from the console for interactions.
+ * - satisfied: Indicates whether the user is satisfied with the library commands.
+ * - model: Represents the library's data and collection of books.
+ * - book: A temporary Book object for adding or suggesting books.
+ * - scanner: Used to gather user input for various actions.
  *
  * Methods:
- * - isSatisfied: Returns the current satisfaction status of the user.
- * - setSatisfaction: Sets the satisfaction status to true to end program.
- * - getAllUnreadBooks: Returns a sorted list of all unread books in the library.
- * - getAllreadBooks: Returns a sorted list of all read books in the library.
- * - suggestRead: Suggests a random unread book from the library.
- * - addBooks: Adds books to the library from a specified text file, skipping headers
- *   and parsing each book's title and author gathered from each line.
- *
+ * - isSatisfied: Returns the user's satisfaction status.
+ * - setSatisfaction: Sets the satisfaction status to true, ending the program.
+ * - addBooks: Reads book data from a file and adds books to the library's collection.
+ * - addBook: Prompts the user to input details and adds a new book to the library.
  */
 
 import java.io.File;
@@ -53,8 +49,6 @@ public class MyLibraryController {
 
 
 	/*
-	 * Adds multiple books to the library from a specified text file.
-	 * 
 	 * This method prompts the user for a text file name, reads the file line by
 	 * line, and parses each line to extract book titles and authors. Each book is
 	 * created as a new Book object with a default rating of 0 and a read status of
@@ -62,10 +56,7 @@ public class MyLibraryController {
 	 * 
 	 * The method skips the first line of the file, which is assumed to contain
 	 * headers. If a line does not contain exactly two pieces of information (title
-	 * and author), that line is ignored.
-	 * 
-	 * If the specified file cannot be found, an error message is displayed.
-	 * 
+	 * and author), that line is ignored. If the specified file cannot be found, an error message is displayed.
 	 * Parameter: fileName The name of the text file containing book data. The
 	 * expected format for each line is "title;author".
 	 */
@@ -103,8 +94,12 @@ public class MyLibraryController {
 	}
 	
 	/*
-	 * This is where the user will add a book to the library list with the required
-	 * information : title, author, rating (optional).
+	 * Adds a new book to the library's collection with the specified details.
+	 * The user will be prompted to provide the following information:
+	 * - Title: The title of the book (required)
+	 * - Author: The author of the book (required)
+	 * - Read Status: Indicates if the user has read the book (required, default is false)
+	 * - Rating: The user can choose to rate the book on a scale from 1 to 5 (optional).
 	 */
 	public void addBook() {
 		ArrayList<Book> library = model.getLibrary();

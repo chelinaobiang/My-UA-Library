@@ -1,10 +1,11 @@
 
-/* Genesis Benedith & Chelina Obiang
- * Project: LA 2 
+/* Authors: Genesis Benedith & Chelina Obiang
+ * Project: LA 2 - Library 
  * Course: CSC 335 - Fall 2024
- * This file contains a main method that runs a text-based 
- * user interface where the user can enter commands to get 
- * or add information to the library
+ * Description: This file contains the main method for a text-based 
+ * user interface that allows users to enter commands to interact 
+ * with a library system, including searching for books, adding books,
+ * rating books, and getting suggestions.
  */
 
 import java.util.Scanner;
@@ -17,14 +18,14 @@ public class MyLibrary {
 
 	}
 
-	public static void main(String[] args) { //does it have to be static? I'm getting errors for try/catch.
+	public static void main(String[] args) {
 		model = new MyLibraryModel();
 		controller = new MyLibraryController(model);
 		
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Welcome to the UA Library!\n");
 		
-		while(!controller.isSatisfied()) {
+		while(!controller.isSatisfied()) { //Makes sure user wants to exit or not
 			System.out.println("What would you like to do? Enter a number from 1-7 for the following commands:");
 			System.out.println("1- search, 2- rate, 3- add a book, 4- add books, 5- read book, 6- get list of books, 7- get suggested book");
 			

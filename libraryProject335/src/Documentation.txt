@@ -4,35 +4,35 @@ Details for the Library UML Classes:
 
 
 MyLibrary Class:
-The MyLibrary class serves as the main interaction point for users who want to manage a collection of books. This class provides 
-essential methods for adding books, sorting them, suggesting what to read next, and more. It ties into the MyLibraryModel class, 
-which manages the internal data and processes, as well as the Book class, which represents individual book objects. Through 
-encapsulation, these classes work together by restricting direct access to data, instead using public methods for interaction.
-The constructor initializes an empty list of unread books and the library model that will manage the book data.
-Return: Creates a new instance of the MyLibrary class with an empty list of unread books. This method ties into the Book class 
-by creating a new Book object and passing it to the model to handle the data. Only specific methods like addBook(), 
-sortBooksByTitle(), and suggestRead() are provided for interaction, ensuring that the core logic is controlled.
+The MyLibrary class serves as the main interaction point for users who want to manage a collection of books. This class 
+provides essential methods for adding books, sorting them, suggesting what to read next, and more. It integrates with 
+the MyLibraryModel class, which handles the internal data and processing, as well as the Book class, representing 
+individual book objects. By utilizing encapsulation, these classes work in tandem to restrict direct access to data, 
+allowing for interaction solely through public methods. The constructor initializes an empty instance of MyLibraryModel 
+to manage the book data.
+Return: This method creates a new instance of the MyLibrary class, ensuring a fresh setup for managing books. It ties into the Book class by facilitating the creation of new Book objects that are passed to the model for data management. Only specific methods like addBook(), sortBooksByTitle(), and suggestRead() are available for user interaction, maintaining control over the core logic.
 
 MyLibraryModel Class:
-The MyLibraryModel class is responsible for managing the data related to the library’s unread books. It acts as a data layer 
-that stores, retrieves, and updates the book collection without exposing the internal structure to the MyLibrary class. By 
-separating data handling from user interaction, MyLibraryModel ensures that the logic for storing books is isolated from 
-how users interact with them. The constructor initializes the list of unread books and prepares the model to store book data.
-Return: Creates a new instance of the MyLibraryModel class with an empty list of unread books. All interactions with the 
-unread books list occur through well-defined methods like addBook() and getUnreadBooks(). This hides the internal 
-structure of the list, ensuring that external classes (like MyLibrary) do not access or modify the list directly.
+The MyLibraryModel class is responsible for managing the data related to the library's unread books. It serves as a data 
+layer that stores, retrieves, and updates the book collection without exposing its internal structure to the MyLibrary 
+class. This separation of data handling from user interaction allows MyLibraryModel to isolate the logic for storing 
+books from how users interact with them. The constructor initializes a new list to hold the unread books and prepares 
+the model for data management.
+
+Return: This method creates a new instance of the MyLibraryModel class with an empty list of unread books. All interactions with the unread books list occur through well-defined methods like addBook() and getUnreadBooks(). This design hides the internal list structure, ensuring external classes (like MyLibrary) cannot directly access or modify it.
 
 MyLibraryController Class:
-The MyLibraryController class is the controller that manages the interaction between the user and the library system. 
-It connects the MyLibrary class (which handles user interactions) with the MyLibraryModel class (which handles the data). 
-The controller ensures that commands from the user are correctly executed by calling the appropriate methods in 
-MyLibraryModel to modify or retrieve data. The constructor initializes the controller with a reference to the library’s 
-model, allowing it to perform operations on the data.
-model: The instance of MyLibraryModel that the controller will manage.
-Return: A new instance of MyLibraryController tied to a specific model.
+The MyLibraryController class acts as the intermediary that manages the interaction between the user and the library 
+system. It connects the MyLibrary class (responsible for user interactions) with the MyLibraryModel class (which manages 
+the data). The controller ensures user commands are executed correctly by invoking the appropriate methods in MyLibraryModel 
+to modify or retrieve data. The constructor initializes the controller with a reference to the library’s model, allowing it 
+to perform necessary data operations.
+
+Model: This instance represents the MyLibraryModel that the controller manages.
+
+Return: This method creates a new instance of MyLibraryController linked to a specific model, ensuring effective management of user commands and data interactions.
 
 Book Class:
-The Book class represents individual books in the library. It stores information about each book’s title and author and 
-provides methods for interacting with that data. The Book class is essential for creating new book entries, which are then 
-managed by the MyLibraryModel class. The constructor initializes a Book object with the provided title and author, along
-with the created rating of zero and read status as false. 
+The Book class represents individual books within the library. It encapsulates information about each book's title, author, rating, and read status. This class is essential 
+for creating new book entries that are subsequently managed by the MyLibraryModel class. The constructor initializes a Book object with the provided title and author, along 
+with an initial rating of zero and a read status set to false.

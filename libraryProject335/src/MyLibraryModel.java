@@ -1,6 +1,19 @@
 
 /*
- * This is where the searching, sorting, reading, and random suggest can be made.
+ * Authors: Genesis Benedith & Chelina Obiang
+ *
+ * This class serves as the model for a library management system.
+ * It provides functionality for searching, sorting, and recommending books 
+ * within a library. Users can search for books by title, author, or rating, 
+ * and can also rate books and mark them as read. The model handles the 
+ * collection of books and provides methods to retrieve read and unread 
+ * books, as well as to suggest a random unread book.
+ *
+ * Key functionalities include:
+ * - Searching for books based on various criteria
+ * - Printing lists of books sorted by title or author
+ * - Suggesting random unread books
+ * - Managing user interactions for book ratings and read status
  */
 
 import java.util.ArrayList;
@@ -64,7 +77,10 @@ public class MyLibraryModel {
 		return result;
 
 	}
-
+	/*
+	 * The method takes no parameters and it takes the input of the title to search for
+	 * and to also have checks to see if they're valid.
+	 */
 	Book searchBookByTitle() {
 		// Get book title from user
 		System.out.println("What is the title of the book you'd like to search for?");
@@ -117,7 +133,10 @@ public class MyLibraryModel {
 		System.out.println("No book found with the title '" + title + "' and author '" + author + "'.");
 		return null;
 	}
-
+	/*
+	 * The method takes no parameters and it takes the input of the author to search for
+	 * and to also have checks to see if they're valid.
+	 */
 	Book searchBookByAuthor() {
 		// Get author name from user
 		System.out.println("Who is the author of the book you'd like to search for?");
@@ -171,7 +190,10 @@ public class MyLibraryModel {
 		System.out.println("No book found with the author '" + author + "' and title '" + title + "'.");
 		return null;
 	}
-
+	/*
+	 * The method takes no parameters and it takes the input of the rating to search for
+	 * and to also have checks to see if they're valid.
+	 */
 	Book searchBookByRating() {
 		// Get rating from user
 		System.out
@@ -251,10 +273,9 @@ public class MyLibraryModel {
 
 
 	/*
-	 * Not sure if a String is appropriate-- but set the book that they Search() for
+	 * Set the book that they Search() for
 	 * to read , but there could be more than one book listed, so then another
-	 * search is made to get one book. Then you display the text they want to read
-	 * based on the book and close it at the end.
+	 * search is made to get one book. Then, book is set to read.
 	 */
 	public void readBook(Book book) {
 		book.setRead();
@@ -326,14 +347,16 @@ public class MyLibraryModel {
 	}
 
 	/*
-	 * Retrieves all unread books from the library.
+	 * Prints books from the library based on specific criteria.
 	 * 
-	 * This method iterates through the provided list of books, collecting those
-	 * that have not been read. It then sorts the unread books by title before
-	 * returning them as a new ArrayList.
+	 * The printUnreadBooks method iterates through the library, checking each book's 
+	 * read status and printing the details of those that have not been read. 
+	 * The printBooksByTitle method sorts the library's books by title and then 
+	 * prints each book's details. The printBooksByAuthor method sorts the 
+	 * library's books by author and prints each book's details. 
 	 * 
-	 * Parameter: library An ArrayList of Book objects representing the library.
-	 * Returns An ArrayList of unread Book objects, sorted by title.
+	 * Parameter: None
+	 * Returns: None
 	 */
 	private void printUnreadBooks() {
 		for (Book book : library) {
@@ -359,7 +382,7 @@ public class MyLibraryModel {
 
 	/*
 	 * This uses the array list of books and displays the books sorted by title,
-	 * then author, then if read or not. I think everything should be printed and
+	 * then author, then if read or not. Everything should be printed and
 	 * each book in a new line.
 	 */
 	public void getBooks() {
