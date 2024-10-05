@@ -15,13 +15,14 @@ public class MyLibraryModel {
 	private ArrayList<Book> library = new ArrayList<>();
 	private MyLibraryController controller;
 
-	public MyLibraryModel() {
-        this.library = new ArrayList<>();
-    }
-	
+	public MyLibraryModel(MyLibraryController controller) {
+		this.library = new ArrayList<>();
+		this.controller = controller;
+	}
+
 	public ArrayList<Book> getLibrary() {
-        return library;
-    }
+		return library;
+	}
 
 	/*
 	 * The user will search for a book based on book title, author, or rating. We
@@ -30,39 +31,38 @@ public class MyLibraryModel {
 	 */
 	public Book searchBooks() {
 		System.out.println("How would you like to search for your book? (Title, Author, or Rating): ");
-	    scanner = new Scanner(System.in);
-	    String searchType = scanner.nextLine().toLowerCase().trim();
+		scanner = new Scanner(System.in);
+		String searchType = scanner.nextLine().toLowerCase().trim();
 
-	    Book result = null;
-	    
-	    switch (searchType) {
-	        case "title":
-	            result = searchBookByTitle();
-	            break;
-	        case "author":
-	            result = searchBookByAuthor();
-	            break;
-	        case "rating":
-	            result = searchBookByRating();
-	            break;
-	        default:
-	            System.out.println("Error: Invalid search type. Please try again.");
-	            result = searchBooks();  // Call the search method again for a valid input
-	    }
+		Book result = null;
 
-	    if (result == null) {
+		switch (searchType) {
+		case "title":
+			result = searchBookByTitle();
+			break;
+		case "author":
+			result = searchBookByAuthor();
+			break;
+		case "rating":
+			result = searchBookByRating();
+			break;
+		default:
+			System.out.println("Error: Invalid search type. Please try again.");
+			result = searchBooks(); // Call the search method again for a valid input
+		}
+
+		if (result == null) {
 			System.out.println("Would you like to search again? (y/n)");
 			scanner = new Scanner(System.in);
-			String searchAgain = scanner.nextLine().toLowerCase().trim(); 
-		    if (searchAgain.equals("y")) {
-                searchBooks(); // Call the search again
-            } else {
-            	System.out.println("No book selected. Returning to the main menu.");
-            }
-        } else {
-        	System.out.println("Found the book: " + result.getTitle());
-        }
-	    return result;
+			String searchAgain = scanner.nextLine().toLowerCase().trim();
+			if (searchAgain.equals("y")) {
+				searchBooks(); // Call the search again
+			} else {
+				System.out.println("No book selected. Returning to the main menu.");
+			}
+		}
+
+		return result;
 
 	}
 
@@ -258,42 +258,61 @@ public class MyLibraryModel {
 		System.out.println("What is the title of the book you would like to add?");
 		scanner = new Scanner(System.in);
 		String title = scanner.nextLine().toLowerCase();
-		
+
 		System.out.println("Who is the author of the book you would like to add?");
 		scanner = new Scanner(System.in);
 		String author = scanner.nextLine().toLowerCase();
-		
+
+		boolean readStatus = false;
+
 		System.out.println("Have you read this book already? (y/n)");
 		scanner = new Scanner(System.in);
-		String read = scanner.nextLine().toLowerCase();
-		boolean readStatus = false;
-		if (read.equals("y")) {
-			readStatus = true;
-		} 
 		
-		System.out.println("Would you like to rate this book now? (y/n)");
-		scanner = new Scanner(System.in);
-		String rate = scanner.nextLine().toLowerCase();
-		int rating = 0;
-		if (rate.equals("y")) {
-			while (true) {
-				try {
-					System.out.println("How many stars would you like to rate this book? (1-5)");
-					scanner = new Scanner(System.in);
-					rating = Integer.parseInt(scanner.nextLine().trim());
-					if (rating < 1 || rating > 5) {
-						System.out.println("Invalid input. Please enter a rating between 1 and 5.");
-					} else {
-						break; // Exit loop if input is valid
-					}
-				} catch (NumberFormatException e) {
-					System.out.println("Invalid input. Please enter a number between 1 and 5.");
-					scanner.next(); // Clear invalid input
-				}
-
+		boolean validCommand = false;
+		String read;
+		
+		while (!validCommand) {
+			read = scanner.nextLine().toLowerCase();
+			if (read.equals("y")) {
+				readStatus = true;
+				validCommand = true;
+			} else if (read.equals("n")) {
+				validCommand = true;
+			} else {
+				System.out.println("Invalid input. Please enter y or n.");
 			}
 		}
+
+		System.out.println("Would you like to rate this book now? (y/n)");
+		scanner = new Scanner(System.in);
 		
+		validCommand = false;
+		int rating = 0;
+		
+		while (!validCommand) {
+	        String rate = scanner.nextLine().toLowerCase();
+	        if (rate.equals("y")) {
+	            System.out.println("How many stars would you like to rate this book? (1-5)");
+	            
+	            while (!validCommand) {
+	                try {
+	                    rating = Integer.parseInt(scanner.nextLine().trim());
+	                    if (rating < 1 || rating > 5) {
+	                        System.out.println("Invalid input. Please enter a rating between 1 and 5.");
+	                    } else {
+	                        validCommand = true;
+	                    }
+	                } catch (NumberFormatException e) {
+	                    System.out.println("Invalid input. Please enter a number between 1 and 5.");
+	                }
+	            }
+	        } else if (rate.equals("n")) {
+	            validCommand = true;
+	        } else {
+	            System.out.println("Invalid input. Please enter y or n.");
+	        }
+	    }
+
 		book = new Book(title, author, rating, readStatus);
 		library.add(book);
 		System.out.println("Book successfully added.");
@@ -306,8 +325,8 @@ public class MyLibraryModel {
 	 * search is made to get one book. Then you display the text they want to read
 	 * based on the book and close it at the end.
 	 */
-	public void readBook(Book book) {		
-		book.setRead(); 
+	public void readBook(Book book) {
+		book.setRead();
 
 	}
 
@@ -324,9 +343,9 @@ public class MyLibraryModel {
 	}
 
 	/*
-	 * This uses the array list of books and displays the books sorted by title, then
-	 * author, then if read or not. I think everything should be printed and each
-	 * book in a new line.
+	 * This uses the array list of books and displays the books sorted by title,
+	 * then author, then if read or not. I think everything should be printed and
+	 * each book in a new line.
 	 */
 	public void getBooks() {
 		System.out.println("To view books in this library, choose one of the following options (1-4):\n");
@@ -334,10 +353,10 @@ public class MyLibraryModel {
 		System.out.println("2. Authors in alphabetical order");
 		System.out.println("3. All unread books");
 		System.out.println("4. All read books");
-		
+
 		scanner = new Scanner(System.in);
-		int option; 
-		
+		int option;
+
 		while (true) {
 			try {
 				option = Integer.parseInt(scanner.nextLine().trim());
@@ -345,13 +364,17 @@ public class MyLibraryModel {
 					System.out.println("Invalid input. Please enter a rating between 1 and 4.");
 				} else {
 					if (option == 1) {
-						
+						controller.printBooksByTitle(library);
+						break;
 					} else if (option == 2) {
-						
+						controller.printBooksByAuthor(library);
+						break;
 					} else if (option == 3) {
-						
+						controller.printUnreadBooks(library);
+						break;
 					} else {
-						
+						controller.printReadBooks(library);
+						break;
 					}
 				}
 			} catch (NumberFormatException e) {
@@ -360,13 +383,6 @@ public class MyLibraryModel {
 			}
 
 		}
-		
-		ArrayList<Book> libraryCopy = getLibrary();
-		
-		for (Book book : libraryCopy) {
-			System.out.println(book.getTitle());
-		}
 	}
-
 
 }
