@@ -1,16 +1,15 @@
 
 /* Genesis Benedith & Chelina Obiang
+ * Project: LA 2 
  * Course: CSC 335 - Fall 2024
  * This file contains a main method that runs a text-based 
  * user interface where the user can enter commands to get 
  * or add information to the library
  */
-import java.io.File;
-import java.util.InputMismatchException;
+
 import java.util.Scanner;
 
 public class MyLibrary {
-	private Scanner scanner;
 	private static MyLibraryModel model;
 	private static MyLibraryController controller;
 
@@ -64,7 +63,7 @@ public class MyLibrary {
 							
 							case 3:
 								
-								model.addBook();
+								controller.addBook();
 								break;
 								
 							case 4: 
@@ -106,18 +105,16 @@ public class MyLibrary {
 					}
 				} catch (NumberFormatException e) {
 					System.out.println("Invalid command. Enter a number from 1-7.");
-//					command = scanner.nextInt();
 				}
 				
 			}
 			
 			System.out.println("Is there anything else you would like to do? (y/n)");
-			scanner = new Scanner(System.in);
-
-			String answer = scanner.nextLine().toLowerCase();
-			if(answer.equals("n")) {
-				controller.setSatisfaction(); // Sets satisfaction to true b/c they don't want to do anything else
-				System.out.println("Thanks for visiting the UA Library!");
+			if (scanner.hasNextLine()) {
+			    String answer2 = scanner.nextLine().toLowerCase().trim();
+			    if (answer2.equals("n")) {
+			        break;  // Exit the loop
+			    }
 			}
 	}
 	scanner.close();

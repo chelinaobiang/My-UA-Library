@@ -6,22 +6,14 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.InputMismatchException;
 import java.util.Random;
-import java.util.ResourceBundle.Control;
 import java.util.Scanner;
 
 public class MyLibraryModel {
 
 	private Scanner scanner;
-	private Book book;
 	private ArrayList<Book> library = new ArrayList<>();
-	private MyLibraryController controller;
 
-//	public MyLibraryModel(MyLibraryController controller) {
-//		this.library = new ArrayList<>();
-//		this.controller = controller;
-//	}
 
 	public MyLibraryModel() {
 		this.library = new ArrayList<>();
@@ -257,74 +249,6 @@ public class MyLibraryModel {
 		return null;
 	}
 
-	/*
-	 * This is where the user will add a book to the library list with the required
-	 * information : title, author, rating (optional).
-	 */
-	public void addBook() {
-		System.out.println("What is the title of the book you would like to add?");
-		scanner = new Scanner(System.in);
-		String title = scanner.nextLine().toLowerCase();
-
-		System.out.println("Who is the author of the book you would like to add?");
-		scanner = new Scanner(System.in);
-		String author = scanner.nextLine().toLowerCase();
-
-		boolean readStatus = false;
-
-		System.out.println("Have you read this book already? (y/n)");
-		scanner = new Scanner(System.in);
-
-		boolean validCommand = false;
-		String read;
-
-		while (!validCommand) {
-			read = scanner.nextLine().toLowerCase();
-			if (read.equals("y")) {
-				readStatus = true;
-				validCommand = true;
-			} else if (read.equals("n")) {
-				validCommand = true;
-			} else {
-				System.out.println("Invalid input. Please enter y or n.");
-			}
-		}
-
-		System.out.println("Would you like to rate this book now? (y/n)");
-		scanner = new Scanner(System.in);
-
-		validCommand = false;
-		int rating = 0;
-
-		while (!validCommand) {
-			String rate = scanner.nextLine().toLowerCase();
-			if (rate.equals("y")) {
-				System.out.println("How many stars would you like to rate this book? (1-5)");
-
-				while (!validCommand) {
-					try {
-						rating = Integer.parseInt(scanner.nextLine().trim());
-						if (rating < 1 || rating > 5) {
-							System.out.println("Invalid input. Please enter a rating between 1 and 5.");
-						} else {
-							validCommand = true;
-						}
-					} catch (NumberFormatException e) {
-						System.out.println("Invalid input. Please enter a number between 1 and 5.");
-					}
-				}
-			} else if (rate.equals("n")) {
-				validCommand = true;
-			} else {
-				System.out.println("Invalid input. Please enter y or n.");
-			}
-		}
-
-		book = new Book(title, author, rating, readStatus);
-		library.add(book);
-		System.out.println("Book successfully added.");
-
-	}
 
 	/*
 	 * Not sure if a String is appropriate-- but set the book that they Search() for
