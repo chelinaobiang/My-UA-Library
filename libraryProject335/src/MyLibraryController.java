@@ -79,11 +79,11 @@ public class MyLibraryController{
 	 * Parameter: library An ArrayList of Book objects representing the library.
 	 * Returns An ArrayList of read Book objects, sorted by title.
 	 */
-	public ArrayList<Book> getAllreadBooks(ArrayList<Book> library) {
+	public ArrayList<Book> getAllReadBooks(ArrayList<Book> library) {
 		ArrayList<Book> readBooks = new ArrayList<>();
-		for(Book b: library) {
-			if(b.isRead() == true) {
-				readBooks.add(b);
+		for(Book book: library) {
+			if(book.isRead() == true) {
+				readBooks.add(book);
 			}
 		}
 		readBooks.sort((b1, b2) -> b1.titleCompareTo(b2));
@@ -133,6 +133,8 @@ public class MyLibraryController{
 		Scanner inputScanner = new Scanner(System.in);
         System.out.println("Type the name of the text file that contains the books you would like to add: ");
         String fileName = inputScanner.nextLine();
+        
+        int booksAdded = 0;
 		
 		try {
 			File file = new File(fileName); 
@@ -145,10 +147,12 @@ public class MyLibraryController{
                     String author = details[1].toLowerCase().trim();
                     book = new Book(title, author, 0, false);
             		library.add(book);
-                }
-                System.out.println("Book added successfully.");
-            } 
-			
+            		booksAdded++;
+                } else {
+                    System.out.println("Skipping invalid line: " + line);
+                }            } 
+			fileScanner.close();
+			System.out.println("Books added successfully: " + booksAdded + " book(s).");
 		} catch (FileNotFoundException e) {
                 System.out.println("File not found: " + fileName);
             }
