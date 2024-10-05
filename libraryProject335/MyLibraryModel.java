@@ -1,3 +1,8 @@
+/**
+ * Authors: Genesis Benedith & Chelina Obiang
+ * This is the class that performs all of the functionalities of the code
+ * along with building up and modifying the library system.
+ */
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;

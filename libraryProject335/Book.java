@@ -1,4 +1,9 @@
-
+/**
+ *  Authors: Genesis Benedith & Chelina Obiang
+ * This class is where the tracking, getting, and setting of the individual
+ * book objects is going to be. This is important to the front and backend
+ * because the project revolves mostly on the indivitual books.
+ */
 public class Book {
 	private String title;
 	private String author;
@@ -6,7 +11,7 @@ public class Book {
 	private MyLibraryController controller;
 	public boolean read;
 
-	// Constructor
+	// Constructor for the book information
 	public Book(String title, String author, int rating, boolean read) {
 		this.title = title;
 		this.author = author;
@@ -24,6 +29,7 @@ public class Book {
 		return str;
 	}
 	
+	//Turns the rate int into a string
 	public String getStrRating(){
 		return ("*".repeat(rating));
 	}
@@ -39,7 +45,8 @@ public class Book {
 	public boolean isRead() {
 		return this.read;
 	}
-
+	
+	//Setters
 	public void setRead() {
 		this.read = true;
 		

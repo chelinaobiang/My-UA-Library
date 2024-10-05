@@ -1,20 +1,6 @@
-* The MyLibraryController class manages a few of the operations for a library system,
+/* Authors: Genesis Benedith & Chelina Obiang
+ * The MyLibraryController class manages a few of the operations for a library system,
  * interacting with the Model and handling functionalities related to books in the library.
- *
- * Attributes:
- * - satisfied (boolean): Indicates whether the user is satisfied with the library commands.
- * - model (MyLibraryModel): The model that represents the library's data.
- * - book (Book): A temporary Book object used for recommendations or additions.
- * - input (Scanner): A Scanner for user input from the console for interactions.
- *
- * Methods:
- * - isSatisfied: Returns the current satisfaction status of the user.
- * - setSatisfaction: Sets the satisfaction status to true to end program.
- * - getAllUnreadBooks: Returns a sorted list of all unread books in the library.
- * - getAllreadBooks: Returns a sorted list of all read books in the library.
- * - suggestRead: Suggests a random unread book from the library.
- * - addBooks: Adds books to the library from a specified text file, skipping headers
- *   and parsing each book's title and author gathered from each line.
  *
  */
 
@@ -53,8 +39,7 @@ public class MyLibraryController{
 	 * Retrieves all unread books from the library.
 	 * 
 	 * This method iterates through the provided list of books, collecting 
-	 * those that have not been read. It then sorts the unread books by title 
-	 * before returning them as a new ArrayList.
+	 * those that have not been read.
 	 * 
 	 * Parameter: library An ArrayList of Book objects representing the library.
 	 * Returns An ArrayList of unread Book objects, sorted by title.
@@ -73,8 +58,7 @@ public class MyLibraryController{
 	 * Retrieves all read books from the library.
 	 * 
 	 * This method iterates through the provided list of books, collecting 
-	 * those that have been read. It then sorts the read books by title 
-	 * before returning them as a new ArrayList.
+	 * those that have been read.
 	 * 
 	 * Parameter: library An ArrayList of Book objects representing the library.
 	 * Returns An ArrayList of read Book objects, sorted by title.
@@ -89,7 +73,9 @@ public class MyLibraryController{
 		Collections.sort(readBooks, Comparator.comparing(Book::getTitle));
 		return readBooks;
 	}
-	
+	/*
+	 * Prints any given Array of books based on the parameter.
+	 */
 	public void printList(ArrayList<Book> books) {
 	    if (books.isEmpty()) {
 	        System.out.println("No books to display.");

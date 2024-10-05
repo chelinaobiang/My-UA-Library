@@ -3,7 +3,8 @@
  * Course: CSC 335 - Fall 2024
  * This file contains a main method that runs a text-based 
  * user interface where the user can enter commands to get 
- * or add information to the library
+ * or add information to the library until they decide
+ * whether or not it meets their satisfaction.
  */
 import java.util.Scanner;
 
@@ -15,7 +16,7 @@ public class MyLibrary {
 		
 	}
 
-	public static void main(String[] args) { //does it have to be static? I'm getting errors for try/catch.
+	public static void main(String[] args) {
 		controller = new MyLibraryController();
 		model = new MyLibraryModel();
 		
