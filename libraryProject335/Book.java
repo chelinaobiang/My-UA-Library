@@ -18,6 +18,7 @@ public class Book {
 	public String getTitle() {
 		return title;
 	}
+
 	public String toString() {
 		String str = "";
 		str += title + " by: " + author + " ( " + getStrRating() + " )";
@@ -41,6 +42,7 @@ public class Book {
 	}
 
 	public void setRead() {
+<<<<<<< Updated upstream:libraryProject335/Book.java
 		this.read = true;
 		
 	}
@@ -51,3 +53,9 @@ public class Book {
 	}
 
 }
+=======
+		controller.makeRead(true);
+
+	}
+}
+>>>>>>> Stashed changes:Book.java
