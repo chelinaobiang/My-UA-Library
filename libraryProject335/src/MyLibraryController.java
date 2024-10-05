@@ -72,6 +72,7 @@ public class MyLibraryController {
 	public void addBooks() {
 		ArrayList<Book> library = model.getLibrary();
 
+		@SuppressWarnings("resource")
 		Scanner inputScanner = new Scanner(System.in);
 		System.out.println("Type the name of the text file that contains the books you would like to add: ");
 		String fileName = inputScanner.nextLine();
@@ -99,8 +100,6 @@ public class MyLibraryController {
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found: " + fileName);
 		}
-		
-		inputScanner.close();
 	}
 	
 	/*
