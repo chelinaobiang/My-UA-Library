@@ -4,7 +4,10 @@
  */
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.InputMismatchException;
+import java.util.Random;
 import java.util.ResourceBundle.Control;
 import java.util.Scanner;
 
@@ -15,9 +18,13 @@ public class MyLibraryModel {
 	private ArrayList<Book> library = new ArrayList<>();
 	private MyLibraryController controller;
 
-	public MyLibraryModel(MyLibraryController controller) {
+//	public MyLibraryModel(MyLibraryController controller) {
+//		this.library = new ArrayList<>();
+//		this.controller = controller;
+//	}
+
+	public MyLibraryModel() {
 		this.library = new ArrayList<>();
-		this.controller = controller;
 	}
 
 	public ArrayList<Book> getLibrary() {
@@ -267,10 +274,10 @@ public class MyLibraryModel {
 
 		System.out.println("Have you read this book already? (y/n)");
 		scanner = new Scanner(System.in);
-		
+
 		boolean validCommand = false;
 		String read;
-		
+
 		while (!validCommand) {
 			read = scanner.nextLine().toLowerCase();
 			if (read.equals("y")) {
@@ -285,33 +292,33 @@ public class MyLibraryModel {
 
 		System.out.println("Would you like to rate this book now? (y/n)");
 		scanner = new Scanner(System.in);
-		
+
 		validCommand = false;
 		int rating = 0;
-		
+
 		while (!validCommand) {
-	        String rate = scanner.nextLine().toLowerCase();
-	        if (rate.equals("y")) {
-	            System.out.println("How many stars would you like to rate this book? (1-5)");
-	            
-	            while (!validCommand) {
-	                try {
-	                    rating = Integer.parseInt(scanner.nextLine().trim());
-	                    if (rating < 1 || rating > 5) {
-	                        System.out.println("Invalid input. Please enter a rating between 1 and 5.");
-	                    } else {
-	                        validCommand = true;
-	                    }
-	                } catch (NumberFormatException e) {
-	                    System.out.println("Invalid input. Please enter a number between 1 and 5.");
-	                }
-	            }
-	        } else if (rate.equals("n")) {
-	            validCommand = true;
-	        } else {
-	            System.out.println("Invalid input. Please enter y or n.");
-	        }
-	    }
+			String rate = scanner.nextLine().toLowerCase();
+			if (rate.equals("y")) {
+				System.out.println("How many stars would you like to rate this book? (1-5)");
+
+				while (!validCommand) {
+					try {
+						rating = Integer.parseInt(scanner.nextLine().trim());
+						if (rating < 1 || rating > 5) {
+							System.out.println("Invalid input. Please enter a rating between 1 and 5.");
+						} else {
+							validCommand = true;
+						}
+					} catch (NumberFormatException e) {
+						System.out.println("Invalid input. Please enter a number between 1 and 5.");
+					}
+				}
+			} else if (rate.equals("n")) {
+				validCommand = true;
+			} else {
+				System.out.println("Invalid input. Please enter y or n.");
+			}
+		}
 
 		book = new Book(title, author, rating, readStatus);
 		library.add(book);
@@ -341,6 +348,90 @@ public class MyLibraryModel {
 		int rating = Integer.parseInt(rate);
 		book.setRate(rating);
 	}
+	
+	/*
+	 * Suggests a random unread book from the library.
+	 * 
+	 * This method first retrieves the list of unread books using the
+	 * getAllUnreadBooks method. It then randomly selects one unread book and prints
+	 * its details as a recommendation to the user.
+	 */
+	public void suggestRead() {
+		System.out.println("Looking for an unread book to recommend...");
+		ArrayList<Book> unreadBooks = new ArrayList<>();
+
+		for (Book book : library) {
+			if (!book.isRead()) {
+				System.out.println("added to unreadbooks array");
+				unreadBooks.add(book);
+			}
+		}
+
+		Book recommendedBook;
+
+		if (unreadBooks.size() == 1) {
+			recommendedBook = unreadBooks.get(0);
+		} else if (unreadBooks.size() == 0) {
+			System.out.println("There are no unread books to recommend at this time.");
+		} else {
+			Random rand = new Random();
+			int randomInt = rand.nextInt(unreadBooks.size());
+			recommendedBook = unreadBooks.get(randomInt);
+			System.out.println("The book I recommend is :" + recommendedBook.getTitle());
+			System.out.println("Book Details: " + recommendedBook.toString());
+		}
+
+	}
+
+	/*
+	 * Retrieves all read books from the library.
+	 * 
+	 * This method iterates through the provided list of books, collecting those
+	 * that have been read. It then sorts the read books by title before returning
+	 * them as a new ArrayList.
+	 * 
+	 * Parameter: library An ArrayList of Book objects representing the library.
+	 * Returns An ArrayList of read Book objects, sorted by title.
+	 */
+	private void printReadBooks() {
+		for (Book book : library) {
+			if (book.isRead()) {
+				System.out.println(book.toString());
+			}
+		}
+	}
+
+	/*
+	 * Retrieves all unread books from the library.
+	 * 
+	 * This method iterates through the provided list of books, collecting those
+	 * that have not been read. It then sorts the unread books by title before
+	 * returning them as a new ArrayList.
+	 * 
+	 * Parameter: library An ArrayList of Book objects representing the library.
+	 * Returns An ArrayList of unread Book objects, sorted by title.
+	 */
+	private void printUnreadBooks() {
+		for (Book book : library) {
+			if (!book.isRead()) {
+				System.out.println(book.toString());
+			}
+		}
+	}
+
+	private void printBooksByTitle() {
+		Collections.sort(library, Comparator.comparing(Book::getTitle));
+		for (Book book : library) {
+			System.out.println(book.toString());
+		}
+	}
+
+	private void printBooksByAuthor() {
+		Collections.sort(library, Comparator.comparing(Book::getAuthor));
+		for (Book book : library) {
+			System.out.println(book.toString());
+		}
+	}
 
 	/*
 	 * This uses the array list of books and displays the books sorted by title,
@@ -364,16 +455,16 @@ public class MyLibraryModel {
 					System.out.println("Invalid input. Please enter a rating between 1 and 4.");
 				} else {
 					if (option == 1) {
-						controller.printBooksByTitle(library);
+						printBooksByTitle();
 						break;
 					} else if (option == 2) {
-						controller.printBooksByAuthor(library);
+						printBooksByAuthor();
 						break;
 					} else if (option == 3) {
-						controller.printUnreadBooks(library);
+						printUnreadBooks();
 						break;
 					} else {
-						controller.printReadBooks(library);
+						printReadBooks();
 						break;
 					}
 				}

@@ -35,8 +35,8 @@ public class MyLibraryController {
 	private Book book;
 	private Scanner input;
 
-	public MyLibraryController() {
-		
+	public MyLibraryController(MyLibraryModel model) {
+		this.model = model;
 	}
 
 	/*
@@ -54,96 +54,13 @@ public class MyLibraryController {
 		this.satisfied = true;
 	}
 
-	public void printBooksByTitle(ArrayList<Book> library) {
-		Collections.sort(library, Comparator.comparing(Book::getTitle));
-		for (Book book : library) {
-			System.out.println(book.toString());
-		}
-	}
-
-	public void printBooksByAuthor(ArrayList<Book> library) {
-		Collections.sort(library, Comparator.comparing(Book::getAuthor));
-		for (Book book : library) {
-			System.out.println(book.toString());
-		}
-	}
-
-	/*
-	 * Retrieves all unread books from the library.
-	 * 
-	 * This method iterates through the provided list of books, collecting those
-	 * that have not been read. It then sorts the unread books by title before
-	 * returning them as a new ArrayList.
-	 * 
-	 * Parameter: library An ArrayList of Book objects representing the library.
-	 * Returns An ArrayList of unread Book objects, sorted by title.
-	 */
-	public void printUnreadBooks(ArrayList<Book> library) {
-		for (Book book : library) {
-			if (!book.isRead()) {
-				System.out.println(book.toString());
-			}
-		}
-	}
-
-	/*
-	 * Retrieves all read books from the library.
-	 * 
-	 * This method iterates through the provided list of books, collecting those
-	 * that have been read. It then sorts the read books by title before returning
-	 * them as a new ArrayList.
-	 * 
-	 * Parameter: library An ArrayList of Book objects representing the library.
-	 * Returns An ArrayList of read Book objects, sorted by title.
-	 */
-	public void printReadBooks(ArrayList<Book> library) {
-		for (Book book : library) {
-			if (book.isRead()) {
-				System.out.println(book.toString());
-			}
-		}
-	}
-
 	public void printList(ArrayList<Book> Books) {
 		for (Book b : Books) {
 			System.out.println(b.toString());
 		}
 	}
 
-	/*
-	 * Suggests a random unread book from the library.
-	 * 
-	 * This method first retrieves the list of unread books using the
-	 * getAllUnreadBooks method. It then randomly selects one unread book and prints
-	 * its details as a recommendation to the user.
-	 */
-	public void suggestRead() {
-		System.out.println("Looking for an unread book to recommend...");
-		ArrayList<Book> library = model.getLibrary();
-		ArrayList<Book> unreadBooks = new ArrayList<>();
-		
-		for (Book book: library) {
-			if (!book.isRead()) {
-				unreadBooks.add(book);
-			}
-		}
-		
-		Book recommendedBook;
-		
-		if (unreadBooks.size() == 1) {
-			recommendedBook = unreadBooks.get(0);
-		} else if (unreadBooks.size() == 0) {
-			System.out.println("There are no unread books to recommend at this time.");
-		} else {
-			Random rand = new Random();
-			int randomInt = rand.nextInt(unreadBooks.size());
-			recommendedBook = unreadBooks.get(randomInt);
-			System.out.println("The book I recommend is :" + book.getTitle());
-			System.out.println("Book Details: " + book.toString());
-		}
-		
-		
-	}
+	
 
 	/*
 	 * Adds multiple books to the library from a specified text file.

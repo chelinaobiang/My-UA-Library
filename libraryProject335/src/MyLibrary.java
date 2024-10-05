@@ -19,8 +19,8 @@ public class MyLibrary {
 	}
 
 	public static void main(String[] args) { //does it have to be static? I'm getting errors for try/catch.
-		controller = new MyLibraryController();
-		model = new MyLibraryModel(controller);
+		model = new MyLibraryModel();
+		controller = new MyLibraryController(model);
 		
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Welcome to the UA Library!\n");
@@ -98,7 +98,7 @@ public class MyLibrary {
 								
 							case 7:
 								
-								controller.suggestRead();
+								model.suggestRead();
 								break;
 						}
 					} else {
