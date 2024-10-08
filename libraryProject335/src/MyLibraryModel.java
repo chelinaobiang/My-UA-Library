@@ -289,8 +289,7 @@ public class MyLibraryModel {
 	public void rateBook(Book book) {
 		System.out.println("What rating would you give it (1-5) stars: ");
 		scanner = new Scanner(System.in);
-		String rate = scanner + "";
-		int rating = Integer.parseInt(rate);
+		int rating = Integer.parseInt(scanner.nextLine().trim());
 		book.setRate(rating);
 	}
 	
